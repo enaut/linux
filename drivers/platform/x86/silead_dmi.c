@@ -82,6 +82,20 @@ static const struct silead_ts_dmi_data surftab_wintron70_st70416_6_data = {
 	.properties	= surftab_wintron70_st70416_6_props,
 };
 
+static const struct property_entry trekstor_primebook_c13_props[] = {
+	PROPERTY_ENTRY_U32("touchscreen-size-x", 2625),
+	PROPERTY_ENTRY_U32("touchscreen-size-y", 1914),
+	PROPERTY_ENTRY_STRING("firmware-name",
+			      "gsl1680-trekstor-primebook-c13.fw"),
+	PROPERTY_ENTRY_U32("silead,max-fingers", 10),
+	{ }
+};
+
+static const struct silead_ts_dmi_data trekstor_primebook_c13_data = {
+	.acpi_name	= "MSSL1680:00",
+	.properties	= trekstor_primebook_c13_props,
+};
+
 static const struct property_entry gp_electronic_t701_props[] = {
 	PROPERTY_ENTRY_U32("touchscreen-size-x", 960),
 	PROPERTY_ENTRY_U32("touchscreen-size-y", 640),
@@ -216,6 +230,14 @@ static const struct dmi_system_id silead_ts_dmi_table[] = {
 			DMI_MATCH(DMI_PRODUCT_NAME, "MOMO7W"),
 			/* Exact match, different versions need different fw */
 			DMI_MATCH(DMI_BIOS_VERSION, "MOMO.G.WI71C.MABMRBA02"),
+		},
+	},
+	{
+		/* Trekstor Primebook C13 */
+		.driver_data = (void *)&trekstr_primebook_c13_data,
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Insyde"), # TODO wrong stuff
+			DMI_MATCH(DMI_PRODUCT_NAME, "ST70416-6"), # TODO wrong stuff
 		},
 	},
 	{
